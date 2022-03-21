@@ -56,7 +56,7 @@ namespace microservices_design_illustrator.Controllers
 
 
 
-        [HttpGet("GetAll/{controllerId}")]
+        [HttpGet("GetAll/{projectId}")]
         public Task<ServiceResult<List<ControllerEntity>>> GetAll(string projectId)
         {
 
