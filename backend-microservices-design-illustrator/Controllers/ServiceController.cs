@@ -8,7 +8,7 @@ namespace microservices_design_illustrator.Controllers
 
     [ApiController]
     [Route("[controller]")]
-    public class ServiceController : ControllerBase
+    public class ServiceController : ControllerBase , IDisposable
     {
 
 
@@ -32,20 +32,26 @@ namespace microservices_design_illustrator.Controllers
         public Task<ServiceResult<string>> Create(ServiceEntity entity)
         {
 
+            
+            var controller = _repository.Controllers.FirstOrDefault(x => x.Id == entity.controllerId);
 
-            if(!_repository.Controllers.Any(x => x.Id == entity.controllerId)) 
+
+
+            if( controller == null ) 
                 return ServiceResult.Empty.SetError("ControllerNotFound" , 400).To<string>().ToAsync();
 
 
 
 
-            if(_repository.Projects.Any(x => x.Name == entity.Name))
+            if(_repository.Services.Any(x => x.Name == entity.Name))
                 return ServiceResult.Empty.SetError("ServiceIsExists").To<string>().ToAsync();
 
 
 
             entity.Id = Guid.NewGuid().ToString();
             _repository.Services.Add(entity);
+            controller.servicesId = new List<string>();
+            controller.servicesId.Add(entity.Id);
             return ServiceResult.Create<string>(entity.Id).ToAsync();
 
 
@@ -104,5 +110,16 @@ namespace microservices_design_illustrator.Controllers
             return ServiceResult.Create<string>(entity.Id).ToAsync();
 
         }
+
+
+
+
+        public void Dispose()
+        {
+            DbRepo.Save(this._repository);
+        }
+
+
+
     }
 }

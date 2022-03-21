@@ -37,6 +37,7 @@ namespace microservices_design_illustrator.Controllers
 
 
             entity.Id = Guid.NewGuid().ToString();
+            entity.ServiceId = new List<string>();
             _repository.Pages.Add(entity);
             return ServiceResult.Create<string>(entity.Id).ToAsync();
 
