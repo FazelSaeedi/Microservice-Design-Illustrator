@@ -8,7 +8,7 @@ namespace microservices_design_illustrator.Controllers
 
     [ApiController]
     [Route("[controller]")]
-    public class ControllerController : ControllerBase
+    public class ControllerController : ControllerBase , IDisposable
     {
 
         
@@ -60,7 +60,7 @@ namespace microservices_design_illustrator.Controllers
         public Task<ServiceResult<List<ControllerEntity>>> GetAll(string projectId)
         {
 
-            if(!_repository.Controllers.Any(x => x.Id == projectId))
+            if(!_repository.Controllers.Any(x => x.ProjectId == projectId))
                 return ServiceResult.Empty.SetError("ProjectNotFound" , 400).To<List<ControllerEntity>>().ToAsync();
             
             
@@ -114,6 +114,13 @@ namespace microservices_design_illustrator.Controllers
             return ServiceResult.Create<string>(entity.Id).ToAsync();
         }
 
+
+
+
+        public void Dispose()
+        {
+            DbRepo.Save(this._repository);
+        }
 
 
 
