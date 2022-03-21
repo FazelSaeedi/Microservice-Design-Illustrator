@@ -29,14 +29,16 @@ namespace backend_microservices_design_illustrator.Dtos.ProjectDtos
 
     public class ProjectControllerDto
     {
-        public ProjectControllerDto(string id, string name)
+        public ProjectControllerDto(string id, string name, int serviceCount)
         {
             Id = id;
             Name = name;
+            ServiceCount = serviceCount;
         }
 
         public string Id { get; set; }
         public string Name { get; set; }
+        public int ServiceCount { get; set; }
 
     }
     
