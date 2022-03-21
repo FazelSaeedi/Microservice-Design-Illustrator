@@ -1,3 +1,4 @@
+using backend_microservices_design_illustrator.Dtos.ProjectDtos;
 using FakeTehranFavaServer.Repositories;
 using MH.DDD.Core.Types;
 using microservices_design_illustrator.Domain;
@@ -61,13 +62,19 @@ namespace microservices_design_illustrator.Controllers
 
 
         [HttpGet("GetAll/{groupId}")]
-        public Task<ServiceResult<List<ProjectEntity>>> GetAll(string groupId)
+        public Task<ServiceResult<List<GetAllProjectsDto>>> GetAll(string groupId)
         {
 
             if(!_repository.Groups.Any(x => x.Id == groupId))
-                 return ServiceResult.Empty.SetError("GroupNotFound" , 400).To<List<ProjectEntity>>().ToAsync();
+                 return ServiceResult.Empty.SetError("GroupNotFound" , 400).To<List<GetAllProjectsDto>>().ToAsync();
 
-            return ServiceResult.Create<List<ProjectEntity>>(_repository.Projects.Where(x => x.GroupId == groupId ).ToList()).ToAsync();
+
+
+            var projects = _repository.Projects.Where(x => x.GroupId == groupId ).ToList();
+
+            var getAllProjectsDto = projects.Select(x => new GetAllProjectsDto(x.Id , x.Name)).ToList();
+            
+            return ServiceResult.Create<List<GetAllProjectsDto>>(getAllProjectsDto).ToAsync();
         }
 
 
