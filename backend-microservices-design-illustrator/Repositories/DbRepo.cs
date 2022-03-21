@@ -61,6 +61,7 @@ namespace FakeTehranFavaServer.Repositories
             repo.Controllers = db.Controllers ?? new DbSetList<ControllerEntity>();
             repo.Pages = db.Pages ?? new DbSetList<PageEntity>();
             repo.Services = db.Services ?? new DbSetList<ServiceEntity>();
+            repo.Events = db.Events ?? new DbSetList<EventEntity>();
         }
 
         public static void Save(IRepository repo)
