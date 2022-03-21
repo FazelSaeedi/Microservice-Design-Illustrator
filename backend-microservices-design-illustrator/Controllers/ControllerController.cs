@@ -1,3 +1,4 @@
+using backend_microservices_design_illustrator.Dtos.ControllerDtos;
 using FakeTehranFavaServer.Repositories;
 using MH.DDD.Core.Types;
 using microservices_design_illustrator.Domain;
@@ -74,9 +75,51 @@ namespace microservices_design_illustrator.Controllers
 
 
         [HttpGet("{id}")]
-        public Task<ServiceResult<ControllerEntity>> GetById(string id)
+        public Task<ServiceResult<GetControllerDetail>> GetById(string id)
         {
-            return ServiceResult.Create<ControllerEntity>(_repository.Controllers.FirstOrDefault(x => x.Id == id)).ToAsync();
+            
+
+
+
+            var controller = _repository.Controllers.FirstOrDefault(x => x.Id == id);
+            if( controller == null )
+                return ServiceResult.Empty.SetError("ControllerNotFound").To<GetControllerDetail>().ToAsync();
+
+
+
+
+
+            var project = _repository.Projects.FirstOrDefault(x => x.Id == controller.ProjectId);
+            if(project == null )
+                return ServiceResult.Empty.SetError("ProjectNotFound" , 404).To<GetControllerDetail>().ToAsync();
+
+
+
+
+
+            var group = _repository.Groups.FirstOrDefault(x => x.Id == project.GroupId);
+            if(group == null )
+                return ServiceResult.Empty.SetError("GroupNotFound" , 404).To<GetControllerDetail>().ToAsync();
+
+
+
+
+            var services = _repository.Services.Where(x => x.controllerId == id).ToList();
+
+
+
+            var getControllerDetail = new GetControllerDetail(
+                controller.Id ,
+                controller.Name ,
+                group.Name ,
+                project.Name ,
+                services.Select(x => new ControllerServiceDto(x.Id , x.Name)).ToList()
+                );
+
+
+            return ServiceResult.Create<GetControllerDetail>(getControllerDetail).ToAsync();
+
+
         }
         
 
