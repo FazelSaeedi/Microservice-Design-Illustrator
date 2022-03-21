@@ -8,7 +8,7 @@ namespace microservices_design_illustrator.Controllers
 
     [ApiController]
     [Route("[controller]")]
-    public class EventController : ControllerBase
+    public class EventController : ControllerBase , IDisposable
     {
 
 
@@ -34,7 +34,7 @@ namespace microservices_design_illustrator.Controllers
             
 
 
-            if(!_repository.Projects.Any(x => x.Name == entity.PublisherProjectId))
+            if(!_repository.Projects.Any(x => x.Id == entity.PublisherProjectId))
                 return ServiceResult.Empty.SetError("ProjectNotFound").To<string>().ToAsync();
             
 
@@ -108,6 +108,15 @@ namespace microservices_design_illustrator.Controllers
             return ServiceResult.Create<string>(entity.Id).ToAsync();
 
 
+        }
+
+
+
+
+
+        public void Dispose()
+        {
+            DbRepo.Save(this._repository);
         }
 
 
