@@ -73,7 +73,6 @@ namespace microservices_design_illustrator.Controllers
             var projects = _repository.Projects.Where(x => x.GroupId == groupId ).ToList();
 
             var getAllProjectsDto = projects.Select(x => new GetAllProjectsDto(x.Id , x.Name)).ToList();
-            
             return ServiceResult.Create<List<GetAllProjectsDto>>(getAllProjectsDto).ToAsync();
         }
 
@@ -83,9 +82,34 @@ namespace microservices_design_illustrator.Controllers
 
 
         [HttpGet("{id}")]
-        public Task<ServiceResult<ProjectEntity>> GetById(string id)
+        public Task<ServiceResult<GetProjectDetailDto>> GetById(string id)
         {
-            return ServiceResult.Create<ProjectEntity>(_repository.Projects.FirstOrDefault(x => x.Id == id)).ToAsync();
+
+            
+            if(!_repository.Projects.Any(x => x.Id == id))
+                 return ServiceResult.Empty.SetError("ProjectNotFound" , 400).To<GetProjectDetailDto>().ToAsync();
+
+
+
+            var projects = _repository.Projects.FirstOrDefault(x => x.Id == id);  
+            var group = _repository.Groups.FirstOrDefault(x => x.Id == projects.GroupId );  
+            var controllers = _repository.Controllers.Where(x => x.ProjectId == id).ToList();            
+            var pages = _repository.Pages.Where(x => x.ProjectId == id).ToList();            
+            var evnts = _repository.Events.Where(x => x.PublisherProjectId == id).ToList();
+
+
+
+            var getProjectDetailDto = new GetProjectDetailDto(
+                    projects.Id ,
+                    projects.Name ,
+                    group.Name ,
+                    controllers.Select(x => new ProjectControllerDto(x.Id , x.Name)).ToList(),
+                    evnts.Select(x => new ProjectEventDto(x.Id , x.Name)).ToList() ,
+                    pages.Select(x => new ProjectPageDto(x.Id , x.Name)).ToList()
+                ); 
+            
+
+            return ServiceResult.Create<GetProjectDetailDto>(getProjectDetailDto).ToAsync();
         }
         
         
