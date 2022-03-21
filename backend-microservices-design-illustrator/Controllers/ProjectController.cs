@@ -37,13 +37,13 @@ namespace microservices_design_illustrator.Controllers
 
 
             if(!_repository.Groups.Any(x => x.Id == entity.GroupId)) 
-                return ServiceResult.Empty.SetError("GroupNotFound" , 400).To<string>().ToAsync();
+                return ServiceResult.Empty.SetError("GroupNotFound" , 404).To<string>().ToAsync();
 
 
 
 
             if(_repository.Projects.Any(x => x.Name == entity.Name))
-                return ServiceResult.Empty.SetError("ProjectIsExists").To<string>().ToAsync();
+                return ServiceResult.Empty.SetError("ProjectIsExists" , 400).To<string>().ToAsync();
 
 
 
