@@ -7,7 +7,7 @@ namespace microservices_design_illustrator.Controllers
 {
 
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class PageController : ControllerBase , IDisposable
     {
         private readonly ILogger<PageController> _logger;

@@ -7,7 +7,7 @@ namespace microservices_design_illustrator.Controllers
 {
 
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class EventController : ControllerBase , IDisposable
     {
 
