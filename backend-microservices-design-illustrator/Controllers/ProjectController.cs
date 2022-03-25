@@ -61,19 +61,19 @@ namespace microservices_design_illustrator.Controllers
 
 
 
-        [HttpGet("GetAll/{groupId}")]
-        public Task<ServiceResult<List<GetAllProjectsDto>>> GetAll(string groupId)
+        [HttpGet("GetAllGroupProjects/{groupId}")]
+        public Task<ServiceResult<List<GetAllGroupProjectsDto>>> GetAll(string groupId)
         {
 
             if(!_repository.Groups.Any(x => x.Id == groupId))
-                 return ServiceResult.Empty.SetError("GroupNotFound" , 400).To<List<GetAllProjectsDto>>().ToAsync();
+                 return ServiceResult.Empty.SetError("GroupNotFound" , 400).To<List<GetAllGroupProjectsDto>>().ToAsync();
 
 
 
             var projects = _repository.Projects.Where(x => x.GroupId == groupId ).ToList();
 
-            var getAllProjectsDto = projects.Select(x => new GetAllProjectsDto(x.Id , x.Name)).ToList();
-            return ServiceResult.Create<List<GetAllProjectsDto>>(getAllProjectsDto).ToAsync();
+            var getAllProjectsDto = projects.Select(x => new GetAllGroupProjectsDto(x.Id , x.Name)).ToList();
+            return ServiceResult.Create<List<GetAllGroupProjectsDto>>(getAllProjectsDto).ToAsync();
         }
 
 
