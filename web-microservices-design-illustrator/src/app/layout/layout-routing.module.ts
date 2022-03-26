@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ControllerDetailComponent } from './controller-detail/controller-detail.component';
 import { GroupProjectComponent } from './group-project/group-project.component';
 import { GroupComponent } from './group/group.component';
 import { LayoutComponent } from './layout.component';
@@ -26,9 +27,13 @@ const routes: Routes = [
         {
           path: 'projects/:id',
           component : ProjectDetailComponent
-        }
-      ],
-   }];
+        }],
+      },
+      {
+        path: 'controller/:id',
+        component : ControllerDetailComponent ,
+      },
+    ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
