@@ -6,6 +6,7 @@ import { GroupComponent } from './group/group.component';
 import { ProjectComponent } from './project/project.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import { GroupProjectComponent } from './group-project/group-project.component';
+import { ControllerDetailComponent } from './controller-detail/controller-detail.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { GroupProjectComponent } from './group-project/group-project.component';
     GroupComponent,
     ProjectComponent,
     ProjectDetailComponent,
-    GroupProjectComponent
+    GroupProjectComponent,
+    ControllerDetailComponent
   ],
   imports: [
     CommonModule,
