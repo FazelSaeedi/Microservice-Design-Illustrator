@@ -25,8 +25,7 @@ export class ProjectComponent implements OnInit {
     this.ProjectService.getAllProjects().subscribe( (response : any) => {
       this.data = response.result
       console.log(response);
-
-    });;
+    });
   }
 
 }

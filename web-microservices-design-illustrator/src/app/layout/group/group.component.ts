@@ -1,4 +1,5 @@
 import { Component, OnInit , Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GroupService } from '../../../shared/http-services/group.service'
 @Component({
   selector: 'app-group',
@@ -8,7 +9,7 @@ import { GroupService } from '../../../shared/http-services/group.service'
 
 export class GroupComponent implements OnInit {
 
-  constructor(private GroupService : GroupService) { }
+  constructor(private GroupService : GroupService , private router: Router, private activatedRoute: ActivatedRoute ) { }
 
   @Input() data : any[] = [];
   @Input() header : any[] = [];
@@ -16,6 +17,13 @@ export class GroupComponent implements OnInit {
 
   ngOnInit(): void {
 
+    
+
+    this.activatedRoute.params.subscribe(param => {
+      console.log(param['id']);
+    })
+
+    console.log(this.router.url)
 
     this.header.push(
       {key : 'id' , value : 'id'} ,

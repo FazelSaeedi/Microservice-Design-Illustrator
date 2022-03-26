@@ -14,9 +14,15 @@ export class ProjectService extends HttpBaseService {
   }
 
 
-  getAllProjects()
-  {
+  getAllProjects(){
       return this.http.get(`${this.apiUrl}/Project/GetAll`);
+  }
+
+
+
+  getProjectDetails(projectId : string)
+  {
+    return this.http.get(`${this.apiUrl}/Project/${projectId}`);
   }
 
 

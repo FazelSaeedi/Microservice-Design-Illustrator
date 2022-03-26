@@ -1,0 +1,94 @@
+
+
+Group Name {{this.data.groupname!}}
+<br>
+Project Name : {{this.data.name!}}
+<br>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+<h2>Controllers</h2>
+<table class="ui basic table">
+  <thead>
+    <tr>
+      <th *ngFor="let header of controllertHeaders">{{header.value}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of this.data.controllers" >
+
+      <td>
+          {{item["id"]}}
+      </td>
+
+
+     <td>
+        {{item["name"]}}
+     </td>
+
+
+     <td>
+      {{item["serviceCount"]}}
+   </td>
+
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<h2>Events</h2>
+<table class="ui basic table">
+  <thead>
+    <tr>
+      <th *ngFor="let header of eventHeaders">{{header.value}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of this.data.events" >
+
+      <td>
+          {{item["id"]}}
+      </td>
+
+
+     <td>
+        {{item["name"]}}
+     </td>
+
+
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+
+<h2>Pages</h2>
+<table class="ui basic table">
+  <thead>
+    <tr>
+      <th *ngFor="let header of pagetHeaders">{{header.value}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of this.data.pages" >
+
+      <td>
+          {{item["id"]}}
+      </td>
+
+
+     <td>
+        {{item["name"]}}
+     </td>
+
+
+    </tr>
+  </tbody>
+</table>
