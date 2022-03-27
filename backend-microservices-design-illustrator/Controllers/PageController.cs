@@ -1,3 +1,5 @@
+using backend_microservices_design_illustrator.Dtos.ControllerDtos;
+using backend_microservices_design_illustrator.Dtos.PageDtos;
 using FakeTehranFavaServer.Repositories;
 using MH.DDD.Core.Types;
 using microservices_design_illustrator.Domain;
@@ -37,7 +39,7 @@ namespace microservices_design_illustrator.Controllers
 
 
             entity.Id = Guid.NewGuid().ToString();
-            entity.ServiceId = new List<string>();
+            entity.ServiceIds = new List<string>();
             _repository.Pages.Add(entity);
             return ServiceResult.Create<string>(entity.Id).ToAsync();
 
@@ -59,9 +61,49 @@ namespace microservices_design_illustrator.Controllers
 
 
         [HttpGet("{id}")]
-        public Task<ServiceResult<PageEntity>> GetById(string id)
+        public Task<ServiceResult<GetPageDetail>> GetById(string id)
         {
-            return ServiceResult.Create<PageEntity>(_repository.Pages.FirstOrDefault(x => x.Id == id)).ToAsync();
+        
+        
+                var page = _repository.Pages.FirstOrDefault(x => x.Id == id);
+                if( page == null )
+                    return ServiceResult.Empty.SetError("PageNotFound").To<GetPageDetail>().ToAsync();
+
+
+
+
+
+                var project = _repository.Projects.FirstOrDefault(x => x.Id == page.ProjectId);
+                if(project == null )
+                    return ServiceResult.Empty.SetError("ProjectNotFound" , 404).To<GetPageDetail>().ToAsync();
+
+
+
+
+
+                var group = _repository.Groups.FirstOrDefault(x => x.Id == project.GroupId);
+                if(group == null )
+                    return ServiceResult.Empty.SetError("GroupNotFound" , 404).To<GetPageDetail>().ToAsync();
+
+
+                List<ServiceEntity> services = null ;
+                if(page.ServiceIds != null)
+                {
+                    services =  _repository.Services.Where(x => page.ServiceIds.Contains(x.Id)).ToList();   
+                }
+
+
+
+                var getControllerDetail = new GetPageDetail(
+                    page.Id ,
+                    page.Name ,
+                    group.Name ,
+                    project.Name ,
+                    services == null ? null : services.Select(x => new PageServiceDto(x.Id , x.Name)).ToList()
+                    );
+
+
+                return ServiceResult.Create<GetPageDetail>(getControllerDetail).ToAsync();    
         }
         
         

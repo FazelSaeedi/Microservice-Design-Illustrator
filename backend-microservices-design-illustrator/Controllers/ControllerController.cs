@@ -113,7 +113,7 @@ namespace microservices_design_illustrator.Controllers
                 controller.Name ,
                 group.Name ,
                 project.Name ,
-                services.Select(x => new ControllerServiceDto(x.Id , x.Name)).ToList()
+                services == null ? null : services.Select(x => new ControllerServiceDto(x.Id , x.Name)).ToList()
                 );
 
 

@@ -101,7 +101,7 @@ public class WeatherForecastController : ControllerBase
             Id = Guid.NewGuid().ToString()  ,
             Name = "Layout" ,
             ProjectId = project1.Id ,
-            ServiceId = new List<string>(){ service.Id  , service1.Id }
+            ServiceIds = new List<string>(){ service.Id  , service1.Id }
         };
 
         var @event = new EventEntity()
