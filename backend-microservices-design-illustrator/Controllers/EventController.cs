@@ -1,3 +1,5 @@
+using backend_microservices_design_illustrator.Dtos.EventDtos;
+using backend_microservices_design_illustrator.Dtos.PageDtos;
 using FakeTehranFavaServer.Repositories;
 using MH.DDD.Core.Types;
 using microservices_design_illustrator.Domain;
@@ -70,9 +72,52 @@ namespace microservices_design_illustrator.Controllers
 
 
         [HttpGet("{id}")]
-        public Task<ServiceResult<EventEntity>> GetById(string id)
+        public Task<ServiceResult<GetEventDto>> GetById(string id)
         {
-            return ServiceResult.Create<EventEntity>(_repository.Events.FirstOrDefault(x => x.Id == id)).ToAsync();
+
+
+
+                var @event = _repository.Events.FirstOrDefault(x => x.Id == id);
+                if( @event == null )
+                    return ServiceResult.Empty.SetError("EventNotFound").To<GetEventDto>().ToAsync();
+
+
+
+
+
+                var project = _repository.Projects.FirstOrDefault(x => x.Id == @event.PublisherProjectId);
+                if(project == null )
+                    return ServiceResult.Empty.SetError("ProjectNotFound" , 404).To<GetEventDto>().ToAsync();
+
+
+
+
+
+                var group = _repository.Groups.FirstOrDefault(x => x.Id == project.GroupId);
+                if(group == null )
+                    return ServiceResult.Empty.SetError("GroupNotFound" , 404).To<GetEventDto>().ToAsync();
+
+
+
+                List<ProjectEntity> PublisherProjects = null ;
+                if(@event.SubcriberProjectIds != null)
+                {
+                    PublisherProjects =  _repository.Projects.Where(x => @event.PublisherProjectId.Contains(x.Id)).ToList();   
+                }
+
+
+
+                var getEventDetail = new GetEventDto(
+                    @event.Id ,
+                    @event.Name ,
+                    group.Name ,
+                    project.Name ,
+                    PublisherProjects == null ? null : PublisherProjects.Select(x => new EventProjectDto(x.Id , x.Name)).ToList()
+                    );
+
+
+                return ServiceResult.Create<GetEventDto>(getEventDetail).ToAsync();  
+        
         }
         
 
