@@ -1,11 +1,11 @@
 
 <div class="ui container mt-5" >
   <div class="ui segment">
-    Group Name : {{ data.groupName }}
+    Group Name : {{ data?.groupName }}
     <br>
-    project Name : {{ data.projectName }}
+    project Name : {{ data?.projectName }}
     <br>
-    controller Name : {{ data.name }}
+    controller Name : {{ data?.name }}
     <br>
 
 
@@ -23,7 +23,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of this.data.services" >
+    <tr *ngFor="let item of this.data?.services" >
 
       <td>
           {{item["id"]}}
