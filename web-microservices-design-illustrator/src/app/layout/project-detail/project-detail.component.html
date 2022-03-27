@@ -50,6 +50,7 @@ Project Name : {{this.data?.name!}}
   </thead>
   <tbody>
     <tr *ngFor="let item of this.data?.events" >
+      <a [href]="'http://localhost:4200/event/' + item.id" target="_blank">
 
       <td>
           {{item["id"]}}
@@ -60,7 +61,7 @@ Project Name : {{this.data?.name!}}
         {{item["name"]}}
      </td>
 
-
+     </a>
     </tr>
   </tbody>
 </table>

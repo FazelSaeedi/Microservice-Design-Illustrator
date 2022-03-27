@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ControllerDetailComponent } from './controller-detail/controller-detail.component';
+import { EventDetailComponent } from './event-detail/event-detail.component';
 import { GroupProjectComponent } from './group-project/group-project.component';
 import { GroupComponent } from './group/group.component';
 import { LayoutComponent } from './layout.component';
@@ -37,6 +38,10 @@ const routes: Routes = [
       {
         path: 'page/:id',
         component : PageDetailComponent ,
+      },
+      {
+        path: 'event/:id',
+        component : EventDetailComponent ,
       },
     ];
 

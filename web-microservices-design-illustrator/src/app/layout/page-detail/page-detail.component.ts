@@ -11,7 +11,7 @@ import { PageService } from 'src/shared/http-services/page.service';
 export class PageDetailComponent implements OnInit {
 
 
-  controllerId : any ;
+  PageId : any ;
   data : any ;
   header : any[] = [
     {key : 'id' , value : 'id'} ,
@@ -25,10 +25,10 @@ export class PageDetailComponent implements OnInit {
 
     this.activatedRoute.params.subscribe(param => {
       //console.log(param['id']);
-      this.controllerId = param['id'];
+      this.PageId = param['id'];
     })
 
-    this.pageService.getPageDetail(this.controllerId).subscribe( (response : any) => {
+    this.pageService.getPageDetail(this.PageId).subscribe( (response : any) => {
       console.log(response);
       this.data = response.result;
     });

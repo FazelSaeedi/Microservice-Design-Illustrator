@@ -8,6 +8,7 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
 import { GroupProjectComponent } from './group-project/group-project.component';
 import { ControllerDetailComponent } from './controller-detail/controller-detail.component';
 import { PageDetailComponent } from './page-detail/page-detail.component';
+import { EventDetailComponent } from './event-detail/event-detail.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { PageDetailComponent } from './page-detail/page-detail.component';
     ProjectDetailComponent,
     GroupProjectComponent,
     ControllerDetailComponent,
-    PageDetailComponent
+    PageDetailComponent,
+    EventDetailComponent
   ],
   imports: [
     CommonModule,
