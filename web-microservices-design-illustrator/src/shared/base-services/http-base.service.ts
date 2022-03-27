@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class HttpBaseService extends BaseService{
+export abstract class HttpBaseService extends BaseService{
 
   private _apiUrl : string = '' ;
 

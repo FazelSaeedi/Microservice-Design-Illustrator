@@ -7,6 +7,7 @@ import { ProjectComponent } from './project/project.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import { GroupProjectComponent } from './group-project/group-project.component';
 import { ControllerDetailComponent } from './controller-detail/controller-detail.component';
+import { PageDetailComponent } from './page-detail/page-detail.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ControllerDetailComponent } from './controller-detail/controller-detail
     ProjectComponent,
     ProjectDetailComponent,
     GroupProjectComponent,
-    ControllerDetailComponent
+    ControllerDetailComponent,
+    PageDetailComponent
   ],
   imports: [
     CommonModule,

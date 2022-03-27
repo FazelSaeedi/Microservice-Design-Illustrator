@@ -4,6 +4,7 @@ import { ControllerDetailComponent } from './controller-detail/controller-detail
 import { GroupProjectComponent } from './group-project/group-project.component';
 import { GroupComponent } from './group/group.component';
 import { LayoutComponent } from './layout.component';
+import { PageDetailComponent } from './page-detail/page-detail.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import { ProjectComponent } from './project/project.component';
 
@@ -32,6 +33,10 @@ const routes: Routes = [
       {
         path: 'controller/:id',
         component : ControllerDetailComponent ,
+      },
+      {
+        path: 'page/:id',
+        component : PageDetailComponent ,
       },
     ];
 
