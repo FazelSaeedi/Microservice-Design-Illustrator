@@ -9,6 +9,7 @@ import { GroupProjectComponent } from './group-project/group-project.component';
 import { ControllerDetailComponent } from './controller-detail/controller-detail.component';
 import { PageDetailComponent } from './page-detail/page-detail.component';
 import { EventDetailComponent } from './event-detail/event-detail.component';
+import { ServiceDetailComponent } from './service-detail/service-detail.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { EventDetailComponent } from './event-detail/event-detail.component';
     GroupProjectComponent,
     ControllerDetailComponent,
     PageDetailComponent,
-    EventDetailComponent
+    EventDetailComponent,
+    ServiceDetailComponent
   ],
   imports: [
     CommonModule,

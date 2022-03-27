@@ -8,6 +8,7 @@ import { LayoutComponent } from './layout.component';
 import { PageDetailComponent } from './page-detail/page-detail.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import { ProjectComponent } from './project/project.component';
+import { ServiceDetailComponent } from './service-detail/service-detail.component';
 
 const routes: Routes = [
    {
@@ -42,6 +43,10 @@ const routes: Routes = [
       {
         path: 'event/:id',
         component : EventDetailComponent ,
+      },
+      {
+        path: 'service/:id',
+        component : ServiceDetailComponent ,
       },
     ];
 
