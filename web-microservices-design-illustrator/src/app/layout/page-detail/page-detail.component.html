@@ -25,6 +25,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let item of this.data?.services" >
+      <a [href]="'http://localhost:4200/service/' + item.id" target="_blank">
 
       <td>
           {{item["id"]}}
@@ -35,7 +36,7 @@
         {{item["name"]}}
      </td>
 
-
+     </a>
     </tr>
   </tbody>
 </table>

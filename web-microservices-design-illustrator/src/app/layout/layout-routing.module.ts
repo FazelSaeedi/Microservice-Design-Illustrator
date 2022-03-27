@@ -24,11 +24,11 @@ const routes: Routes = [
           component : GroupProjectComponent ,
         },
         {
-          path: 'projects',
+          path: 'project',
           component : ProjectComponent
         },
         {
-          path: 'projects/:id',
+          path: 'project/:id',
           component : ProjectDetailComponent
         }],
       },
