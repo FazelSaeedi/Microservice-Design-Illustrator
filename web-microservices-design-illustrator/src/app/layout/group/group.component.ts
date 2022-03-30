@@ -13,11 +13,12 @@ export class GroupComponent implements OnInit {
 
   @Input() data : any[] = [];
   @Input() header : any[] = [];
+  ShowModal : boolean = false ;
 
 
   ngOnInit(): void {
 
-    
+
 
     this.activatedRoute.params.subscribe(param => {
       console.log(param['id']);
@@ -36,5 +37,16 @@ export class GroupComponent implements OnInit {
 
 
   }
+
+
+  countChangedHandler(count: number) {
+    console.log('event called');
+
+    console.log(count);
+  }
+
+  OnChangeModal() : void {
+    this.ShowModal = !this.ShowModal ;
+ }
 
 }

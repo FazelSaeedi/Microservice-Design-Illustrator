@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DialogComponent } from '../dialog/dialog.component';
 import { ControllerDetailComponent } from './controller-detail/controller-detail.component';
 import { EventDetailComponent } from './event-detail/event-detail.component';
 import { GroupProjectComponent } from './group-project/group-project.component';
@@ -48,6 +49,10 @@ const routes: Routes = [
         path: 'service/:id',
         component : ServiceDetailComponent ,
       },
+      {
+        path: 'dialog',
+        component : DialogComponent ,
+      }
     ];
 
 @NgModule({

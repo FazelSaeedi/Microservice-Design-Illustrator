@@ -1,5 +1,5 @@
 
-
+<button (click)="this.ShowModal = true">Add New Group</button>
 <table class="ui basic table">
   <thead>
     <tr>
@@ -14,3 +14,5 @@
     </tr>
   </tbody>
 </table>
+
+<app-dialog (onClose)="OnChangeModal()" (countChanged)="countChangedHandler($event)" *ngIf="ShowModal" ></app-dialog>

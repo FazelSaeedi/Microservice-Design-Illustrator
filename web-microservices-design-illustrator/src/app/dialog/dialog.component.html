@@ -1,0 +1,14 @@
+<div (click)="onCloseClick()"  class="ui dimmer visible active">
+  <div (click)="$event.stopPropagation()" class="ui modal visible active">
+      <i class="close icon" (click)="onCloseClick()" ></i>
+      <div class="header">
+         header
+      </div>
+      <div class="content">
+        content
+      </div>
+      <div class="actions actions-default">
+          <button  (click)="onSubmit()" class="ui button">OK</button>
+      </div>
+  </div>
+</div>
