@@ -1,7 +1,8 @@
 import { Component, OnInit , Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { createGroupDto } from 'src/shared/models/groups/GroupModels';
+import { TServiceResult } from 'src/shared/helper/t-service-result';
+import { createGroupDto, GetAllGroupDto } from 'src/shared/models/groups/GroupModels';
 import { GroupService } from '../../../shared/http-services/group.service'
 import { EditGroupDialogComponent } from './edit-group-dialog/edit-group-dialog.component';
 @Component({
@@ -15,7 +16,7 @@ export class GroupComponent implements OnInit {
   constructor(private GroupService : GroupService , private router: Router, private activatedRoute: ActivatedRoute ,    public dialog: MatDialog,
     ) { }
 
-  @Input() data : any[] = [];
+  @Input() data : GetAllGroupDto[] = [];
   @Input() header : any[] = [];
   ShowModal : boolean = false ;
 
@@ -31,6 +32,7 @@ export class GroupComponent implements OnInit {
     this.header.push(
       {key : 'id' , value : 'id'} ,
       {key : 'name' , value : 'name'},
+      {key : 'delete' , value : 'delete'},
     );
 
     this.GroupService.getAllGroups().subscribe( (response : any) => {
@@ -49,8 +51,26 @@ export class GroupComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe( (res : createGroupDto) => {
        console.log(res);
+
+       this.GroupService.addGroup(res).subscribe(x =>{
+         console.log(x);
+         this.data.push({id : x.result , name : res.name});
+       });
+
     });
   }
+
+
+  deleteCategory(item : GetAllGroupDto){
+       this.GroupService.deleteGroup(item.id).subscribe( (res : TServiceResult<string>) => {
+           if(res.hasError == true)
+             alert(res.error.message)
+          else
+            this.GroupService.getAllGroups().subscribe( (response : any) => {
+              this.data = response.result
+            });
+       });
+    }
 
   countChangedHandler(count: number) {
     console.log('event called');

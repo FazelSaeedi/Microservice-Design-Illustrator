@@ -89,7 +89,14 @@ namespace microservices_design_illustrator.Controllers
 
 
             if(entity == null)
-                return ServiceResult.Empty.SetError("" , 400).To<string>().ToAsync();
+                return ServiceResult.Empty.SetError("GroupIsNotExist" , 400).To<string>().ToAsync();
+
+
+
+            if(_repository.Projects.Any(x => x.GroupId == id))
+                return ServiceResult.Empty.SetError("GroupHasProject" , 400).To<string>().ToAsync();
+
+
 
 
             _repository.Groups.Remove(entity);
