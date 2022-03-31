@@ -34,6 +34,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { DialogComponent } from '../dialog/dialog.component';
+import { EditGroupDialogComponent } from './group/edit-group-dialog/edit-group-dialog.component';
 
 
 
@@ -47,7 +48,8 @@ import { DialogComponent } from '../dialog/dialog.component';
     PageDetailComponent,
     EventDetailComponent,
     ServiceDetailComponent,
-    DialogComponent
+    DialogComponent,
+    EditGroupDialogComponent
   ],
   imports: [
     CommonModule,
