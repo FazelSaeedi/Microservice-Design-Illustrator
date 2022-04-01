@@ -35,6 +35,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { DialogComponent } from '../dialog/dialog.component';
 import { EditGroupDialogComponent } from './group/edit-group-dialog/edit-group-dialog.component';
+import { CreateProjectDialogComponent } from './project/create-project-dialog/create-project-dialog.component';
 
 
 
@@ -49,7 +50,8 @@ import { EditGroupDialogComponent } from './group/edit-group-dialog/edit-group-d
     EventDetailComponent,
     ServiceDetailComponent,
     DialogComponent,
-    EditGroupDialogComponent
+    EditGroupDialogComponent,
+    CreateProjectDialogComponent
   ],
   imports: [
     CommonModule,

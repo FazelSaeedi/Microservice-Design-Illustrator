@@ -1,5 +1,5 @@
 
-
+<mat-icon (click)="addNewProject()">create_new_folder</mat-icon>
 <table class="ui basic table">
   <thead>
     <tr>
@@ -7,23 +7,27 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of data"  [routerLink]="['/project' , item.id ]">
+    <tr *ngFor="let item of data">
+
+      <a  [routerLink]="['/project' , item.id ]" >
+
+        <td>
+            {{item["id"]}}
+        </td>
 
 
-
-      <td>
-          {{item["id"]}}
-      </td>
-
-
-     <td>
-        {{item["name"]}}
-     </td>
-
-
-     <td>
-      {{item["group"]["name"]}}
-   </td>
+        <td>
+            {{item["name"]}}
+        </td>
+        <td>
+          {{item["group"]["name"]}}
+        </td>
+      </a>
+   <td (click)="deleteProject(item)">
+    <button mat-icon-button>
+      <mat-icon>delete_forever</mat-icon>
+    </button>
+  </td>
 
     </tr>
   </tbody>
