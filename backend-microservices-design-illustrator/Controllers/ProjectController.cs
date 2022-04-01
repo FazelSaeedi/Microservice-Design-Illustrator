@@ -156,8 +156,23 @@ namespace microservices_design_illustrator.Controllers
 
 
 
+            if(_repository.Controllers.Any(x => x.ProjectId == id))
+                return ServiceResult.Empty.SetError("ProjectHasController" , 400).To<string>().ToAsync();
+
+
+
+            if(_repository.Events.Any(x => x.PublisherProjectId == id))
+                return ServiceResult.Empty.SetError("ProjectHasEvents" , 400).To<string>().ToAsync();
+
+
+
+            if(_repository.Pages.Any(x => x.ProjectId == id))
+                return ServiceResult.Empty.SetError("ProjectHasPages" , 400).To<string>().ToAsync();
+
+
+
             if(entity == null)
-                return ServiceResult.Empty.SetError("" , 400).To<string>().ToAsync();
+                return ServiceResult.Empty.SetError("ProjectNotFound" , 400).To<string>().ToAsync();
 
 
             _repository.Projects.Remove(entity);
