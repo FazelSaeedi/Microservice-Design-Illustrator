@@ -123,9 +123,9 @@ namespace microservices_design_illustrator.Controllers
                     projects.Id ,
                     projects.Name ,
                     group.Name ,
-                    controllers.Select(x => new ProjectControllerDto(x.Id , x.Name , x.servicesId.Count)).ToList(),
-                    evnts.Select(x => new ProjectEventDto(x.Id , x.Name)).ToList() ,
-                    pages.Select(x => new ProjectPageDto(x.Id , x.Name)).ToList()
+                    controllers.Count == 0 ? new List<ProjectControllerDto>() : controllers.Select(x => new ProjectControllerDto(x.Id , x.Name , x.servicesId == null ? 0 : x.servicesId.Count)).ToList(),
+                    evnts.Count == 0 ? new List<ProjectEventDto>() : evnts.Select(x => new ProjectEventDto(x.Id , x.Name)).ToList() ,
+                    pages.Count == 0 ? new List<ProjectPageDto>() : pages.Select(x => new ProjectPageDto(x.Id , x.Name)).ToList()
                 ); 
             
 
