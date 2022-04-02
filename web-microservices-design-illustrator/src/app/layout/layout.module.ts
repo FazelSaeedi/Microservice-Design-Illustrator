@@ -36,6 +36,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { DialogComponent } from '../dialog/dialog.component';
 import { EditGroupDialogComponent } from './group/edit-group-dialog/edit-group-dialog.component';
 import { CreateProjectDialogComponent } from './project/create-project-dialog/create-project-dialog.component';
+import { CreateControllerDialogComponent } from './project-detail/create-controller-dialog/create-controller-dialog.component';
+import { CreatePageDialogComponent } from './project-detail/create-page-dialog/create-page-dialog.component';
+import { CreateEventDialogComponent } from './project-detail/create-event-dialog/create-event-dialog.component';
 
 
 
@@ -51,7 +54,10 @@ import { CreateProjectDialogComponent } from './project/create-project-dialog/cr
     ServiceDetailComponent,
     DialogComponent,
     EditGroupDialogComponent,
-    CreateProjectDialogComponent
+    CreateProjectDialogComponent,
+    CreateControllerDialogComponent,
+    CreatePageDialogComponent,
+    CreateEventDialogComponent
   ],
   imports: [
     CommonModule,

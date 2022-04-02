@@ -42,7 +42,8 @@ export class ProjectComponent implements OnInit {
      else
        this.ProjectService.getAllProjects().subscribe( (response : any) => {
          this.data = response.result
-       });      });
+       });
+      });
     }
 
   addNewProject(){

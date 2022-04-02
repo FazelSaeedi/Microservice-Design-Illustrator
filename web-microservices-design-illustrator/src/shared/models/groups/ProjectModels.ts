@@ -16,3 +16,8 @@ export class CreateProjectDto{
   name! : string ;
   groupId! : string
 }
+
+export class CreateControllerDto{
+  name! : string ;
+  projectId! : string ;
+}
