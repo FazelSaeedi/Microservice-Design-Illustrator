@@ -1,1 +1,40 @@
-<p>create-event-dialog works!</p>
+<section class="col-12 row mx-0 h-100 p-0 m-0">
+  <header class="col-12 d-flex justify-content-between mb-3">
+    <span>add Event</span>
+    <mat-icon mat-dialog-close>clear</mat-icon>
+  </header>
+  <form class="form row mx-0 col-12 justify-content-between align-items-center p-0 mb-3" [formGroup]="myGroup">
+    <div class="row col-12 justify-content-between align-items-center mx-0 p-0 mb-2">
+
+    </div>
+
+
+    <div class="row col-12 justify-content-between mx-0 p-0 mb-2 mt-4">
+      <mat-form-field class="col-md-6" appearance="outline">
+        <mat-label>عنوان</mat-label>
+        <input required matInput [(ngModel)]="createEventDto.name" formControlName="name">
+        <!-- <mat-error *ngIf="discountGroup.controls['title'].hasError('required')">
+          پر کردن عنوان الزامی است
+        </mat-error> -->
+      </mat-form-field>
+    </div>
+
+
+
+    <div class="row col-12 justify-content-between mx-0 p-0 mb-2 mt-4">
+      <mat-form-field class="col-md-6" appearance="outline">
+        <mat-label>inputDto</mat-label>
+        <input required matInput [(ngModel)]="createEventDto.inputDto" formControlName="name">
+        <!-- <mat-error *ngIf="discountGroup.controls['title'].hasError('required')">
+          پر کردن عنوان الزامی است
+        </mat-error> -->
+      </mat-form-field>
+    </div>
+
+
+
+  </form>
+  <div class="col-12 d-flex justify-content-end">
+    <button mat-button class="purple-1" [disabled]="myGroup.invalid" (click)="createEvent()">تایید</button>
+  </div>
+</section>

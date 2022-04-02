@@ -21,3 +21,10 @@ export class CreateControllerDto{
   name! : string ;
   projectId! : string ;
 }
+
+export class CreateEventrDto{
+
+  name! : string ;
+  publisherProjectId! : string ;
+  inputDto! : string ;
+}

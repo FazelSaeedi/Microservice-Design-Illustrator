@@ -2,9 +2,11 @@ import { Component, OnInit ,  } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { ControllerService } from 'src/shared/http-services/controller.service';
+import { EventService } from 'src/shared/http-services/event.service';
 import { ProjectService } from 'src/shared/http-services/project.service';
-import { CreateControllerDto } from 'src/shared/models/groups/ProjectModels';
+import { CreateControllerDto, CreateEventrDto } from 'src/shared/models/groups/ProjectModels';
 import { CreateControllerDialogComponent } from './create-controller-dialog/create-controller-dialog.component';
+import { CreateEventDialogComponent } from './create-event-dialog/create-event-dialog.component';
 
 @Component({
   selector: 'app-project-detail',
@@ -13,7 +15,7 @@ import { CreateControllerDialogComponent } from './create-controller-dialog/crea
 })
 export class ProjectDetailComponent implements OnInit {
 
-  constructor(private controllerService : ControllerService , private projectService : ProjectService , private activatedRoute: ActivatedRoute ,  public dialog: MatDialog) { }
+  constructor(private eventService : EventService , private controllerService : ControllerService , private projectService : ProjectService , private activatedRoute: ActivatedRoute ,  public dialog: MatDialog) { }
   projectId : string = '' ;
   data : any ;
 
@@ -87,8 +89,32 @@ export class ProjectDetailComponent implements OnInit {
 
   addEvent()
   {
+        const dialogRef = this.dialog.open(CreateEventDialogComponent, {
+          width: '600px',
+          height: '550px',
+          disableClose: true,
+        });
 
-  }
+
+        dialogRef.afterClosed().subscribe( (res : CreateEventrDto) => {
+           console.log(res);
+           res.publisherProjectId = this.projectId ;
+
+           this.eventService.addEvent(res).subscribe( (res : any )=>{
+
+            if(res.hasError == true)
+              alert(res.error.message)
+            else
+              this.projectService.getProjectDetails(this.projectId).subscribe( (response : any) => {
+                console.log(response);
+                this.data = response.result;
+              });
+
+           });
+
+
+        });
+ }
 
   addPage()
   {
